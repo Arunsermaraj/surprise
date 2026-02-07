@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Forever Story | Anniversary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --warm-bg: #fffcf2;
+            --rose-gold: #e29578;
+            --deep-blush: #d64933;
+            --glass: rgba(255, 255, 255, 0.7);
+            --gold: #d4af37;
+        }
+
+        /* Prevent scrolling while overlay is open */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--warm-bg);
+            font-family: 'Quicksand', sans-serif;
+            color: #444;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- OVERLAY WITH CUSTOM BACKGROUND --- */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Faster transition: changed from 1.2s to 0.8s with a snappier curve */
+            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            overflow: hidden;
+            background: var(--warm-bg);
+        }
+
+        /* Custom Background Image Layer with 5s Fade-In */
+        .overlay-bg-image {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('overlay-photo.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -3;
+            opacity: 0;
+            animation: bgFadeIn 5s ease-in-out forwards;
+        }
+
+        @keyframes bgFadeIn {
+            0% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 0.35; transform: scale(1); }
+        }
+
+        .overlay-tint {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,252,242,0.5) 0%, rgba(255, 235, 238, 0.7) 100%);
+            backdrop-filter: blur(6px);
+            z-index: -2;
+        }
+
+        .overlay-bg-icons {
+            position: absolute;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* --- HEART TAG --- */
+        .heart-tag-wrapper {
+            position: relative;
+            padding: 40px;
+            border-radius: 50% 50% 15px 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            animation: floatTag 3s ease-in-out infinite;
+            backdrop-filter: blur(5px);
+        }
+
+        .heart-tag-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -150px; left: 50%;
+            width: 2px; height: 150px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .pulse-heart {
+            font-size: 4.5rem;
+            animation: pulse 1.5s infinite;
+            color: var(--deep-blush);
+            filter: drop-shadow(0 0 15px rgba(214, 73, 51, 0.4));
+        }
+
+        @keyframes floatTag {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .surprise-btn {
+            background: var(--deep-blush);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(214, 73, 51, 0.3);
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(214, 73, 51, 0.4);
+        }
+
+        /* --- MAIN PAGE --- */
+        #music-btn {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            z-index: 1000;
+            background: var(--glass);
+            border: 1px solid var(--rose-gold);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+        }
+
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+                        url('main-background.jpg.jpg') no-repeat center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; 
+            padding-bottom: 35vh; 
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            width: 85%;
+            max-width: 500px;
+        }
+
+        h1 { font-family: 'Pinyon Script', cursive; font-size: clamp(3rem, 10vw, 5.5rem); margin: 0; color: var(--deep-blush); }
+
+        .counter-wrapper {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            background: var(--warm-bg);
+            padding: 15px;
+            border-radius: 15px;
+            min-width: 80px;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .timer-box span { display: block; font-size: 1.8rem; font-weight: 700; color: var(--deep-blush); }
+
+        .memory-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .floating-photo {
+            background: white; padding: 10px; border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .floating-photo img { width: 100%; border-radius: 10px; height: 300px; object-fit: cover; }
+        .floating-photo .caption { font-family: 'Dancing Script', cursive; font-size: 1.4rem; padding: 12px 0; color: var(--rose-gold); }
+
+        .baby-spotlight {
+            background: white;
+            border-radius: 40px;
+            padding: 60px 20px;
+            margin: 80px auto;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .baby-flip-container {
+            width: 280px; height: 280px; margin: 0 auto 30px; perspective: 1000px;
+        }
+
+        .baby-flip-inner {
+            position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer;
+        }
+
+        .baby-flip-inner.is-flipped { transform: rotateY(180deg); }
+
+        .baby-front, .baby-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 50%; border: 8px solid var(--warm-bg); overflow: hidden;
+        }
+
+        .baby-back { transform: rotateY(180deg); }
+        .baby-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .letter-wrap {
+            background: linear-gradient(135deg, #fdf2f2 0%, #fff 100%);
+            padding: 50px 30px;
+            border-radius: 30px;
+            margin-bottom: 100px;
+            box-shadow: 20px 20px 60px #d9d9d9;
+        }
+
+        .icon {
+            position: fixed;
+            pointer-events: none;
+            z-index: 888;
+            opacity: 0;
+            animation: driftUp 5s linear forwards;
+        }
+
+        @keyframes driftUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            header { padding-bottom: 25vh; }
+        }
+    </style>
+</head>
+<body class="no-scroll">
+
+    <button id="music-btn" onclick="toggleMusic()">🎵</button>
+
+    <div id="overlay">
+        <div class="overlay-bg-image"></div>
+        <div class="overlay-tint"></div>
+        <div class="overlay-bg-icons" id="overlayIcons"></div>
+        
+        <div class="heart-tag-wrapper">
+            <div class="pulse-heart">❤️</div>
+        </div>
+        
+        <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--deep-blush); margin: 0;">For My Sister & Atha</h2>
+        <p style="letter-spacing: 3px; font-size: 0.8rem; color: #8a7b6a; margin-bottom: 30px;">2 YEARS OF PURE LOVE</p>
+        
+        <button class="surprise-btn" onclick="initiate()">OPEN SURPRISE ✨</button>
+        <p style="margin-top: 25px; font-size: 0.8rem; color: #888;">Tap to start the music</p>
+    </div>
+
+    <header id="parallax">
+        <div class="glass-card">
+            <p style="letter-spacing: 5px; font-weight: 700;">HAPPY</p>
+            <h1>2nd Year</h1>
+            <p style="letter-spacing: 5px; font-weight: 700;">ANNIVERSARY</p>
+        </div>
+    </header>
+
+    <section class="counter-wrapper">
+        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--rose-gold);">Counting Every Happy Second...</h2>
+        <div class="timer-container">
+            <div class="timer-box"><span id="days">00</span><label>Days</label></div>
+            <div class="timer-box"><span id="hours">00</span><label>Hours</label></div>
+            <div class="timer-box"><span id="minutes">00</span><label>Mins</label></div>
+            <div class="timer-box"><span id="seconds">00</span><label>Secs</label></div>
+        </div>
+    </section>
+
+    <div class="container" style="width: 90%; max-width: 1100px; margin: auto;">
+        <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--rose-gold); text-align: center; margin-top: 50px;">How Far You've Come</h2>
+        <div class="memory-section">
+            <div class="floating-photo">
+                <img src="memory1.jpg.jpg" alt="Memory 1">
+                <div class="caption">The Day It Began</div>
+            </div>
+            <div class="floating-photo">
+                <img src="memory2.jpg.jpg" alt="Memory 2">
+                <div class="caption">Cherished Moments</div>
+            </div>
+            <div class="floating-photo">
+                <img src="memory3.jpg.jpg" alt="Memory 3">
+                <div class="caption">Forever to Go</div>
+            </div>
+            <div class="floating-photo">
+                <img src="memory4.jpg.jpg" alt="Memory 4">
+                <div class="caption">A Beautiful Journey</div>
+            </div>
+            <div class="floating-photo">
+                <img src="memory5.jpg.jpg" alt="Memory 5">
+                <div class="caption">Pure Happiness</div>
+            </div>
+        </div>
+
+        <section class="baby-spotlight">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--rose-gold); margin-bottom: 10px;">Our Little Miracle</h2>
+            <div class="baby-flip-container">
+                <div class="baby-flip-inner" id="babyPhoto" onclick="this.classList.toggle('is-flipped')">
+                    <div class="baby-front">
+                        <img src="baby_newborn.jpg.JPG" class="baby-img" alt="Baby Front">
+                    </div>
+                    <div class="baby-back">
+                        <img src="baby_now.jpg.JPG" class="baby-img" alt="Baby Back">
+                    </div>
+                </div>
+            </div>
+            <p style="font-style: italic; font-size: 1.2rem;">"Watching your family grow is my greatest joy."</p>
+        </section>
+
+        <div class="letter-wrap">
+            <h3 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--deep-blush);">My Dearest Sister & Atha,</h3>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #555;">
+                Two years ago, I watched the two of you promise forever to each other. Since then, your love hasn't just stayed the same—it has grown, deepened, and blossomed into something even more beautiful. 
+                <br><br>
+                Watching you navigate life together, especially as you’ve welcomed your little miracle, has been such an inspiration. You’ve built a home filled with laughter, patience, and a kind of love that everyone hopes to find. 
+                <br><br>
+                May this third year be your most adventurous one yet.
+            </p>
+            <p style="font-family: 'Pinyon Script'; font-size: 3rem; text-align: right; margin-top: 20px;">With all my love, Arun</p>
+        </div>
+    </div>
+
+    <audio id="music" loop>
+        <source src="anniversary_song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Wedding Date: Feb 15, 2024
+        const weddingDate = new Date(2024, 1, 15); 
+
+        function startOverlayIcons() {
+            const container = document.getElementById('overlayIcons');
+            for(let i=0; i<15; i++) {
+                const icon = document.createElement('div');
+                icon.innerHTML = ['❤️', '✨', '💖'][Math.floor(Math.random()*3)];
+                icon.style.position = 'absolute';
+                icon.style.left = Math.random() * 100 + '%';
+                icon.style.top = Math.random() * 100 + '%';
+                icon.style.opacity = '0.2';
+                icon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                icon.style.animation = `driftUp ${Math.random() * 5 + 5}s linear infinite`;
+                container.appendChild(icon);
+            }
+        }
+        startOverlayIcons();
+
+        function updateLoveCounter() {
+            const now = new Date();
+            const diff = now - weddingDate;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((diff / (1000 * 60)) % 60).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
+        }
+        setInterval(updateLoveCounter, 1000);
+
+        function initiate() {
+            // Unlock scrolling
+            document.body.classList.remove('no-scroll');
+            
+            // Start the disappearance immediately
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            overlay.style.transform = 'translateY(-100%)'; // Makes it slide up fast
+            
+            setTimeout(() => { 
+                overlay.style.display = 'none';
+                document.getElementById('music-btn').style.display = 'block';
+            }, 800); // Matches the new 0.8s transition
+
+            document.getElementById('music').play();
+            setInterval(createFlower, 500);
+        }
+
+        function toggleMusic() {
+            const m = document.getElementById('music');
+            const btn = document.getElementById('music-btn');
+            if (m.paused) { m.play(); btn.innerText = "🎵"; }
+            else { m.pause(); btn.innerText = "🔇"; }
+        }
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('icon');
+            flower.innerHTML = ['🌸', '✨', '💖', '🥂'][Math.floor(Math.random() * 4)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.bottom = '-10vh';
+            flower.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 5000);
+        }
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(header) {
+                header.style.backgroundPositionY = (window.pageYOffset * 0.5) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
