@@ -37,14 +37,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Faster transition: changed from 1.2s to 0.8s with a snappier curve */
             transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             overflow: hidden;
             background: var(--warm-bg);
         }
 
-        /* Custom Background Image Layer with 5s Fade-In */
         .overlay-bg-image {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -150,7 +148,7 @@
         header {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
-                        url('main-background.jpg.jpg') no-repeat center;
+                        url('main-background.jpg.JPG') no-repeat center;
             background-size: cover;
             background-attachment: fixed;
             display: flex;
@@ -220,6 +218,21 @@
             margin: 80px auto;
             text-align: center;
             max-width: 800px;
+        }
+
+        .tap-hint {
+            font-size: 0.85rem;
+            color: var(--rose-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         .baby-flip-container {
@@ -309,29 +322,30 @@
         <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--rose-gold); text-align: center; margin-top: 50px;">How Far You've Come</h2>
         <div class="memory-section">
             <div class="floating-photo">
-                <img src="memory1.jpg.jpg" alt="Memory 1">
+                <img src="memory1.jpg.JPG" alt="Memory 1">
                 <div class="caption">The Day It Began</div>
             </div>
             <div class="floating-photo">
-                <img src="memory2.jpg.jpg" alt="Memory 2">
+                <img src="memory2.jpg.JPG" alt="Memory 2">
                 <div class="caption">Cherished Moments</div>
             </div>
             <div class="floating-photo">
-                <img src="memory3.jpg.jpg" alt="Memory 3">
+                <img src="memory3.jpg.JPG" alt="Memory 3">
                 <div class="caption">Forever to Go</div>
             </div>
             <div class="floating-photo">
-                <img src="memory4.jpg.jpg" alt="Memory 4">
+                <img src="memory4.jpg.JPG" alt="Memory 4">
                 <div class="caption">A Beautiful Journey</div>
             </div>
             <div class="floating-photo">
-                <img src="memory5.jpg.jpg" alt="Memory 5">
+                <img src="memory5.jpg.JPG" alt="Memory 5">
                 <div class="caption">Pure Happiness</div>
             </div>
         </div>
 
         <section class="baby-spotlight">
             <h2 style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--rose-gold); margin-bottom: 10px;">Our Little Miracle</h2>
+            <span class="tap-hint">✨ Tap to see the miracle ✨</span>
             <div class="baby-flip-container">
                 <div class="baby-flip-inner" id="babyPhoto" onclick="this.classList.toggle('is-flipped')">
                     <div class="baby-front">
@@ -393,18 +407,15 @@
         setInterval(updateLoveCounter, 1000);
 
         function initiate() {
-            // Unlock scrolling
             document.body.classList.remove('no-scroll');
-            
-            // Start the disappearance immediately
             const overlay = document.getElementById('overlay');
             overlay.style.opacity = '0';
-            overlay.style.transform = 'translateY(-100%)'; // Makes it slide up fast
+            overlay.style.transform = 'translateY(-100%)';
             
             setTimeout(() => { 
                 overlay.style.display = 'none';
                 document.getElementById('music-btn').style.display = 'block';
-            }, 800); // Matches the new 0.8s transition
+            }, 800);
 
             document.getElementById('music').play();
             setInterval(createFlower, 500);
